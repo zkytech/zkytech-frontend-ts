@@ -1,26 +1,35 @@
+import {BrowserRouter, Route} from "react-router-dom";
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Index from './pages/index';
+import Scrollbars from 'react-custom-scrollbars'
+import {checkRememberMeAction} from "./actions";
+import {connect} from "react-redux";
+import {Dispatch} from "redux";
 
-const App: React.FC = () => {
+interface ReduxDispatch {
+  onCheckRememberMe:()=>any
+}
+
+interface AppProps extends ReduxDispatch{
+
+}
+
+
+const App: React.FC<AppProps> = ({onCheckRememberMe}) => {
+  onCheckRememberMe()
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Scrollbars style={{height:'100vh'}} id={'myScroll'} autoHide>
+        <BrowserRouter>
+          <Route component={Index}/>
+        </BrowserRouter>
+      </Scrollbars>
   );
 }
 
-export default App;
+const mapStateToProps = (state:any):any =>({})
+
+const mapDispatchToProps = (dispatch:Dispatch):ReduxDispatch =>{
+  return {onCheckRememberMe:()=>checkRememberMeAction(dispatch)}
+}
+
+export default connect<{},ReduxDispatch,{},{}>(mapStateToProps,mapDispatchToProps)(App);

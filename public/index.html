@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="https://cdn.bootcss.com/react/16.8.6/umd/react.production.min.js"></script>
+    <script src="https://cdn.bootcss.com/react-dom/16.8.6/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.bootcss.com/redux/4.0.1/redux.min.js"></script>
+    <script src="https://cdn.bootcss.com/react-redux/7.0.3/react-redux.min.js"></script>
+    <script src="https://cdn.bootcss.com/redux-thunk/2.3.0/redux-thunk.min.js"></script>
+    <script src="https://cdn.bootcss.com/react-router-dom/5.0.0/react-router-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/marked/0.6.2/marked.min.js"></script>
+    <script src="https://cdn.bootcss.com/highlight.js/9.15.6/highlight.min.js"></script>
     <meta charset="utf-8" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,10 +27,63 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>zkyTech</title>
+
+    <style>
+      .loading{width:100%; height: 100%;position: fixed;top:0;left: 0;z-index: 100;background: #ffffff;}
+      .loading .pic{
+        width: 64px;
+        height: 64px;
+        /* background: url(images/loading.gif); */
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left:0;
+        right:0;
+        margin: auto}
+
+      .loading .pic i{
+        display: block;
+        float: left;
+        width: 6px;
+        height: 50px;
+        background: #399;
+        margin: 0 2px;
+        transform: scaleY(0.4);
+        animation: load 1.2s infinite;
+      }
+      .loading .pic i:nth-child(1){animation-delay:0.1s }
+      .loading .pic i:nth-child(2){animation-delay:0.2s }
+      .loading .pic i:nth-child(3){animation-delay:0.3s }
+      .loading .pic i:nth-child(4){animation-delay: 0.4s}
+      .loading .pic i:nth-child(5){animation-delay:0.5s }
+
+      @keyframes load{
+        0%,40%,100%{transform: scaleY(0.4)}
+        20%{transform:scaleY(1) }
+      }
+    </style>
+    <script>
+
+      document.onreadystatechange=function(){
+        if(document.readyState=="complete"){
+          let loading = document.getElementById("home_page_loading")
+          loading.parentNode.removeChild(loading)
+        }
+      }
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div class="loading" id="home_page_loading">
+      <div class="pic">
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+      </div>
+    </div>
     <div id="root"></div>
     <!--
       This HTML file is a template.
